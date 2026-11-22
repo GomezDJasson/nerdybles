@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, ImageOff, Sparkles } from "lucide-react";
 import MobileProductCarousel from "../components/MobileProductCarousel";
+import InstagramFeed from "../components/InstagramFeed";
 import { Link } from "react-router-dom";
 import { useCatalog } from "../context/CatalogContext";
 import nerdBot from "../../nerdbot.png";
@@ -330,6 +331,8 @@ function Home() {
             )}
           </div>
         </section>
+
+        <InstagramFeed />
 
         <section id="nosotros" className="scroll-mt-20">
           <div className="mx-auto grid max-w-7xl gap-8 px-5 py-20 sm:px-8 md:grid-cols-[0.7fr_1.3fr] md:items-center">
