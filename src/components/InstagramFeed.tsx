@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Instagram, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 type InstagramPost = {
   id: string;
@@ -88,7 +88,21 @@ function InstagramFeed() {
             rel="noopener noreferrer"
             className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white/80 transition-colors hover:border-[#a78bfa]/50 hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6c945]"
           >
-            <Instagram size={17} aria-hidden="true" />
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
             @nerdybles
             <ExternalLink size={14} aria-hidden="true" />
           </a>
