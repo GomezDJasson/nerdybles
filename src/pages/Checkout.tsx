@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { ArrowLeft, MessageCircle, ShieldCheck, ShoppingBag } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCatalog } from "../context/CatalogContext";
-import { useCart } from "../context/CartContext";
+import { useCatalog } from "../context/useCatalog";
+import { useCart } from "../context/useCart";
 import { WHATSAPP_NUMBER } from "../constants/store";
 
 const currencyFormatter = new Intl.NumberFormat("es-CO", {

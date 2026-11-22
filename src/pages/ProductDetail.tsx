@@ -10,8 +10,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
-import { useCart } from "../context/CartContext";
-import { useCatalog } from "../context/CatalogContext";
+import { useCart } from "../context/useCart";
+import { useCatalog } from "../context/useCatalog";
 
 const currencyFormatter = new Intl.NumberFormat("es-CO", {
   style: "currency",

@@ -3,7 +3,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, ImageOff, Sparkles } from "lucid
 import MobileProductCarousel from "../components/MobileProductCarousel";
 import InstagramFeed from "../components/InstagramFeed";
 import { Link } from "react-router-dom";
-import { useCatalog } from "../context/CatalogContext";
+import { useCatalog } from "../context/useCatalog";
 import nerdBot from "../../nerdbot.png";
 
 function Home() {

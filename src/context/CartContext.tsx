@@ -1,38 +1,21 @@
 import {
-  createContext,
-  useContext,
   useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
-import { useCatalog } from "./CatalogContext";
+
+import { useCatalog } from "./useCatalog";
 import type { Product } from "../types/product";
+import { CartContext } from "./cart-context";
 
-interface StoredCartItem {
-  productId: string;
-  quantity: number;
-}
-
-interface CartItem extends StoredCartItem {
-  product: Product | null;
-}
-
-type AddItemResult = "added" | "limit" | "unavailable";
-
-interface CartContextValue {
-  items: CartItem[];
-  totalQuantity: number;
-  subtotal: number;
-  addItem: (product: Product) => AddItemResult;
-  updateQuantity: (productId: string, quantity: number) => void;
-  removeItem: (productId: string) => void;
-  clearCart: () => void;
-}
+import type {
+  StoredCartItem,
+  CartItem,
+  AddItemResult,
+} from "./cart-context";
 
 const STORAGE_KEY = "nerdybles-cart-v1";
-
-const CartContext = createContext<CartContextValue | null>(null);
 
 function readStoredCart(): StoredCartItem[] {
   try {
@@ -143,14 +126,4 @@ export function CartProvider({ children }: { children: ReactNode }) {
       {children}
     </CartContext.Provider>
   );
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-
-  if (!context) {
-    throw new Error("useCart debe utilizarse dentro de CartProvider.");
-  }
-
-  return context;
 }

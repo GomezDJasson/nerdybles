@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Menu, MessageCircle, ShoppingCart, X } from "lucide-react";
 import SocialIcon, { type SocialNetwork } from "./SocialIcon";
-import { useCart } from "../context/CartContext";
+import { useCart } from "../context/useCart";
 import nerdBot from "../../nerdbot.png";
 
 const navigation = [

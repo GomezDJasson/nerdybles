@@ -1,20 +1,11 @@
 import {
-  createContext,
-  useContext,
   useEffect,
   useState,
   type ReactNode,
 } from "react";
 import { getCatalog } from "../services/catalog";
 import type { CatalogResponse } from "../types/product";
-
-interface CatalogContextValue {
-  catalog: CatalogResponse | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const CatalogContext = createContext<CatalogContextValue | null>(null);
+import { CatalogContext } from "./catalog-context";
 
 interface CatalogProviderProps {
   children: ReactNode;
@@ -53,14 +44,4 @@ export function CatalogProvider({ children }: CatalogProviderProps) {
       {children}
     </CatalogContext.Provider>
   );
-}
-
-export function useCatalog() {
-  const context = useContext(CatalogContext);
-
-  if (!context) {
-    throw new Error("useCatalog debe utilizarse dentro de CatalogProvider.");
-  }
-
-  return context;
 }

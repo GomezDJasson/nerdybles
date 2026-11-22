@@ -1,12 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import ProductCard from "../components/ProductCard";
-import { useCatalog } from "../context/CatalogContext";
+import { useCatalog } from "../context/useCatalog";
+import type { Product } from "../types/product";
 
 type AvailabilityFilter = "Todos" | "Disponible" | "Agotado";
 
 const PAGE_SIZE = 12;
+const EMPTY_PRODUCTS: Product[] = [];
 
 function Shop() {
   const { catalog, loading, error } = useCatalog();
@@ -14,9 +16,12 @@ function Shop() {
   const [search, setSearch] = useState("");
   const [brand, setBrand] = useState("Todas");
   const [availability, setAvailability] = useState<AvailabilityFilter>("Todos");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [pagination, setPagination] = useState({
+    filterKey: "",
+    count: PAGE_SIZE,
+  });
 
-  const products = catalog?.products ?? [];
+  const products = catalog?.products ?? EMPTY_PRODUCTS;
 
   const categories = catalog?.categories ?? [];
   const categoryNames = categories.map((item) => item.name);
@@ -34,31 +39,30 @@ function Shop() {
     setSearchParams(nextParams);
   };
 
-  const brands = useMemo(
-    () => [...new Set(products.map((product) => product.brand).filter(Boolean))].sort(),
-    [products]
-  );
+ const brands = [
+    ...new Set(products.map((product) => product.brand).filter(Boolean)),
+  ].sort();
 
-  const filteredProducts = useMemo(() => {
+  const filteredProducts = products.filter((product) => {
     const normalizedSearch = search.trim().toLocaleLowerCase("es");
 
-    return products.filter((product) => {
-      const matchesSearch =
-        !normalizedSearch ||
-        [product.name, product.brand, product.collection, product.sku, product.category]
-          .some((value) => value.toLocaleLowerCase("es").includes(normalizedSearch));
-      const matchesCategory = category === "Todas" || product.category === category;
-      const matchesBrand = brand === "Todas" || product.brand === brand;
-      const matchesAvailability =
-        availability === "Todos" || product.availability === availability;
+    const matchesSearch =
+      !normalizedSearch ||
+      [product.name, product.brand, product.collection, product.sku, product.category]
+        .some((value) => value.toLocaleLowerCase("es").includes(normalizedSearch));
 
-      return matchesSearch && matchesCategory && matchesBrand && matchesAvailability;
-    });
-  }, [products, search, category, brand, availability]);
+    const matchesCategory = category === "Todas" || product.category === category;
+    const matchesBrand = brand === "Todas" || product.brand === brand;
+    const matchesAvailability =
+      availability === "Todos" || product.availability === availability;
 
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [search, category, brand, availability]);
+    return matchesSearch && matchesCategory && matchesBrand && matchesAvailability;
+  });
+
+  const filterKey = JSON.stringify([search, category, brand, availability]);
+
+  const visibleCount =
+    pagination.filterKey === filterKey ? pagination.count : PAGE_SIZE;
 
   const visibleProducts = filteredProducts.slice(0, visibleCount);
   const hasMoreProducts = visibleCount < filteredProducts.length;
@@ -215,7 +219,12 @@ function Shop() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => setVisibleCount((current) => current + PAGE_SIZE)}
+                  onClick={() =>
+                    setPagination({
+                      filterKey,
+                      count: visibleCount + PAGE_SIZE,
+                    })
+                  }
                   className="min-h-11 rounded-full border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-7 py-3 text-sm font-bold text-[#ddd0ff] transition-colors hover:border-[#a78bfa] hover:bg-[#a78bfa]/20 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#f6c945]"
                 >
                   Ver más productos

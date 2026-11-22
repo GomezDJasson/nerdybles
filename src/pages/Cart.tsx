@@ -1,7 +1,7 @@
 import { ArrowLeft, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useCatalog } from "../context/CatalogContext";
-import { useCart } from "../context/CartContext";
+import { useCatalog } from "../context/useCatalog";
+import { useCart } from "../context/useCart";
 
 const currencyFormatter = new Intl.NumberFormat("es-CO", {
   style: "currency",
