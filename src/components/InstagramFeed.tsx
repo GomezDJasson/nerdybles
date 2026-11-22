@@ -43,7 +43,7 @@ function InstagramFeed() {
         }
 
         setPosts(result.data);
-      } catch (error) {
+      } catch {
         if (!controller.signal.aborted) {
           setHasError(true);
         }
