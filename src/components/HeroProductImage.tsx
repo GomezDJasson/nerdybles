@@ -56,7 +56,7 @@ function getInitialSelection(products: Product[]): ProductSelection {
       }
     }
   } catch {
-    localStorage.removeItem(STORAGE_KEY);
+    // Si el almacenamiento no está disponible, se selecciona un producto nuevo.
   }
 
   const now = Date.now();
