@@ -120,6 +120,12 @@ function Home() {
 
               {heroProducts.length > 0 ? (
                 <HeroProductImage products={heroProducts} />
+              ) : loading ? (
+                <div
+                  aria-label="Cargando producto destacado"
+                  role="status"
+                  className="relative z-10 h-[230px] w-full max-w-[510px] sm:h-[400px]"
+                />
               ) : (
                 <img
                   src={nerdBot}
