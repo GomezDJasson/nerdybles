@@ -15,6 +15,8 @@ function MobileProductCarousel({
   gridClassName,
 }: MobileProductCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const touchStartXRef = useRef<number | null>(null);
+  const touchDirectionRef = useRef<-1 | 1 | null>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
 
   const updateControls = useCallback(() => {
@@ -37,6 +39,44 @@ function MobileProductCarousel({
       window.removeEventListener("resize", updateControls);
     };
   }, [products.length, updateControls]);
+
+  const handleTrackScroll = () => {
+    updateControls();
+
+    const track = trackRef.current;
+    const direction = touchDirectionRef.current;
+    if (!track || !direction) return;
+
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const isAtStart = track.scrollLeft <= 1;
+    const isAtEnd = track.scrollLeft >= maxScrollLeft - 1;
+
+    if (direction === 1 && isAtEnd) {
+      touchDirectionRef.current = null;
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (direction === -1 && isAtStart) {
+      touchDirectionRef.current = null;
+      track.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
+    }
+  };
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    touchStartXRef.current = event.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    const startX = touchStartXRef.current;
+    const endX = event.changedTouches[0]?.clientX;
+    touchStartXRef.current = null;
+
+    if (startX === null || endX === undefined) return;
+
+    const deltaX = startX - endX;
+    if (Math.abs(deltaX) < 30) return;
+
+    touchDirectionRef.current = deltaX > 0 ? 1 : -1;
+    handleTrackScroll();
+  };
 
   const scroll = (direction: -1 | 1) => {
     const track = trackRef.current;
@@ -68,7 +108,9 @@ function MobileProductCarousel({
     <>
       <div
         ref={trackRef}
-        onScroll={updateControls}
+        onScroll={handleTrackScroll}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         role="region"
         aria-label={label}
         className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth md:hidden [@media(orientation:landscape)_and_(min-width:600px)]:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
