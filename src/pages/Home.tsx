@@ -168,7 +168,7 @@ function Home() {
                   Encuentra tu colección
                 </h2>
               </div>
-              <div className="flex items-end justify-between gap-4 sm:justify-end [@media(orientation:portrait)_and_(min-width:600px)]:hidden">
+              <div className="flex items-end justify-between gap-4 sm:justify-end">
                 <p className="max-w-md text-sm leading-7 text-white/50 sm:text-right">
                   Un catálogo pensado para descubrir nuevas piezas y encontrar
                   esos personajes que siempre has querido tener.
@@ -221,7 +221,7 @@ function Home() {
                 ref={categoriesTrackRef}
                 onScroll={updateCategoriesControls}
                 aria-label="Categorías disponibles"
-                className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [@media(orientation:portrait)_and_(min-width:600px)]:overflow-hidden [@media(orientation:portrait)_and_(min-width:600px)]:snap-none"
+                className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
                 {categories.map((category) => (
                   <Link
