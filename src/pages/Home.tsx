@@ -118,19 +118,13 @@ function Home() {
               <div className="absolute h-[75%] w-[75%] rounded-full bg-[#6d28d9]/25 blur-[90px]" />
               <div className="absolute bottom-[8%] h-8 w-[62%] rounded-[50%] bg-black/50 blur-2xl" />
 
-              {heroProducts.length > 0 ? (
-                <HeroProductImage products={heroProducts} />
-              ) : loading ? (
-                <div
-                  aria-label="Cargando producto destacado"
-                  role="status"
-                  className="relative z-10 h-[230px] w-full max-w-[510px] sm:h-[400px]"
-                />
+              {heroProducts.length > 0 || loading ? (
+                <HeroProductImage products={heroProducts} loading={loading} />
               ) : (
                 <img
                   src={nerdBot}
                   alt="Mascota de Nerdybles junto a una figura coleccionable"
-                  className="relative z-10 w-full max-w-[510px] object-contain drop-shadow-[0_25px_55px_rgba(91,33,182,0.3)]"
+                  className="relative z-10 w-full max-w-[510px] object-contain drop-shadow-[0_25px_55px_rgba(91,33,190,0.3)]"
                 />
               )}
             </div>
