@@ -6,13 +6,11 @@ import type { Product } from "../types/product";
 interface MobileProductCarouselProps {
   products: Product[];
   label: string;
-  gridClassName: string;
 }
 
 function MobileProductCarousel({
   products,
   label,
-  gridClassName,
 }: MobileProductCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
@@ -113,13 +111,13 @@ function MobileProductCarousel({
         onTouchEnd={handleTouchEnd}
         role="region"
         aria-label={label}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth md:hidden [@media(orientation:landscape)_and_(min-width:600px)]:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {products.map((product) => (
           <div
             key={product.id}
             data-product-card
-            className="w-[calc((100%-1rem)/2)] shrink-0 snap-start [@media(orientation:portrait)_and_(min-width:600px)]:w-[calc((100%-2rem)/3)]"
+            className="w-[calc((100%-1rem)/2)] shrink-0 snap-start [@media(orientation:portrait)_and_(min-width:600px)]:w-[calc((100%-2rem)/3)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)] md:w-[calc((100%-3rem)/4)]"
           >
             <ProductCard product={product} variant="compact" />
           </div>
@@ -127,7 +125,7 @@ function MobileProductCarousel({
       </div>
 
       {hasOverflow && (
-        <div className="mt-5 flex justify-center gap-3 md:hidden">
+        <div className="mt-5 flex justify-center gap-3">
           <button
             type="button"
             onClick={() => scroll(-1)}
@@ -140,18 +138,12 @@ function MobileProductCarousel({
             type="button"
             onClick={() => scroll(1)}
             aria-label={`Ver más ${label.toLowerCase()}`}
-            className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-[#171222] text-white transition-colors hover:border-[#a78bfa]/50 hover:bg-[#6f3abe] disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6c945]"
+            className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-[#171222] text-white transition-colors hover:border-[#a78bfa]/50 hover:bg-[#6f3abe] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6c945]"
           >
             <ChevronRight size={20} />
           </button>
         </div>
       )}
-
-      <div className={`hidden ${gridClassName} md:grid [@media(orientation:landscape)_and_(min-width:600px)]:grid`}>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} variant="compact" />
-        ))}
-      </div>
     </>
   );
 }
