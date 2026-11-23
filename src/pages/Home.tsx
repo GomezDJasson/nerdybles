@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, ImageOff, Sparkles } from "lucide-react";
 import MobileProductCarousel from "../components/MobileProductCarousel";
+import HeroProductImage from "../components/HeroProductImage";
 import InstagramFeed from "../components/InstagramFeed";
 import { Link } from "react-router-dom";
 import { useCatalog } from "../context/useCatalog";
@@ -22,6 +23,17 @@ function Home() {
             Date.parse(b.dateAdded) - Date.parse(a.dateAdded)
         )
         .slice(0, 4),
+    [catalog?.products]
+  );
+
+  const heroProducts = useMemo(
+    () =>
+      (catalog?.products ?? []).filter(
+        (product) =>
+          product.availability === "Disponible" &&
+          product.stock > 0 &&
+          Boolean(product.images.main?.trim())
+      ),
     [catalog?.products]
   );
 
@@ -101,23 +113,20 @@ function Home() {
               </p>
             </div>
 
-            {/* IMAGEN DE NERDBOT */}
+            {/* IMAGEN ALEATORIA DE PRODUCTO */}
             <div className="relative mx-auto -mt-3 flex w-full min-w-0 max-w-[540px] items-center justify-center self-start sm:mt-0 sm:self-center lg:col-start-2 lg:row-span-2">
               <div className="absolute h-[75%] w-[75%] rounded-full bg-[#6d28d9]/25 blur-[90px]" />
               <div className="absolute bottom-[8%] h-8 w-[62%] rounded-[50%] bg-black/50 blur-2xl" />
 
-              <img
-                src={nerdBot}
-                alt="Mascota de Nerdybles junto a una figura coleccionable"
-                className="relative z-10 w-full max-w-[510px] object-contain drop-shadow-[0_25px_55px_rgba(91,33,182,0.3)]"
-              />
-
-              <div className="absolute right-1 top-[16%] hidden rounded-2xl border border-white/10 bg-[#211a30]/90 px-4 py-3 shadow-xl backdrop-blur sm:block">
-                <p className="text-[10px] font-bold tracking-[0.18em] text-[#f6c945]">
-                  HELLO, GEEK!
-                </p>
-                <p className="mt-1 text-xs text-white/65">Tu espacio coleccionista</p>
-              </div>
+              {heroProducts.length > 0 ? (
+                <HeroProductImage products={heroProducts} />
+              ) : (
+                <img
+                  src={nerdBot}
+                  alt="Mascota de Nerdybles junto a una figura coleccionable"
+                  className="relative z-10 w-full max-w-[510px] object-contain drop-shadow-[0_25px_55px_rgba(91,33,182,0.3)]"
+                />
+              )}
             </div>
 
             {/* BOTONES: TERCER ELEMENTO DEL GRID */}
