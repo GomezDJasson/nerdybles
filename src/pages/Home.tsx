@@ -289,7 +289,7 @@ function Home() {
               <MobileProductCarousel
                 products={newestProducts}
                 label="Novedades"
-                gridClassName="gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5"
               />
             )}
           </div>
@@ -343,7 +343,7 @@ function Home() {
               <MobileProductCarousel
                 products={catalog?.featured ?? []}
                 label="Productos destacados"
-                gridClassName="gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5"
               />
             )}
           </div>
