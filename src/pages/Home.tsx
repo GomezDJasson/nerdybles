@@ -39,18 +39,12 @@ function Home() {
 
   const categories = catalog?.categories ?? [];
   const categoriesTrackRef = useRef<HTMLDivElement>(null);
-  const [canScrollCategoriesPrev, setCanScrollCategoriesPrev] = useState(false);
-  const [canScrollCategoriesNext, setCanScrollCategoriesNext] = useState(false);
   const [hasCategoriesOverflow, setHasCategoriesOverflow] = useState(false);
 
   const updateCategoriesControls = useCallback(() => {
     const track = categoriesTrackRef.current;
     if (!track) return;
 
-    setCanScrollCategoriesPrev(track.scrollLeft > 1);
-    setCanScrollCategoriesNext(
-      track.scrollLeft + track.clientWidth < track.scrollWidth - 1
-    );
     setHasCategoriesOverflow(track.scrollWidth > track.clientWidth + 1);
   }, []);
 
@@ -74,6 +68,20 @@ function Home() {
     if (!track || !firstCard) return;
 
     const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const isAtStart = track.scrollLeft <= 1;
+    const isAtEnd = track.scrollLeft >= maxScrollLeft - 1;
+
+    if (direction === 1 && isAtEnd) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (direction === -1 && isAtStart) {
+      track.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
+      return;
+    }
+
     track.scrollBy({
       left: direction * (firstCard.getBoundingClientRect().width + gap),
       behavior: "smooth",
@@ -178,16 +186,14 @@ function Home() {
                     <button
                       type="button"
                       onClick={() => scrollCategories(-1)}
-                      disabled={!canScrollCategoriesPrev}
                       aria-label="Ver categorías anteriores"
-                      className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-[#171222] text-white transition-colors hover:border-[#a78bfa]/50 hover:bg-[#6f3abe] disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6c945]"
+                      className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-[#171222] text-white transition-colors hover:border-[#a78bfa]/50 hover:bg-[#6f3abe] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6c945]"
                     >
                       <ChevronLeft size={20} />
                     </button>
                     <button
                       type="button"
                       onClick={() => scrollCategories(1)}
-                      disabled={!canScrollCategoriesNext}
                       aria-label="Ver más categorías"
                       className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-[#171222] text-white transition-colors hover:border-[#a78bfa]/50 hover:bg-[#6f3abe] disabled:cursor-not-allowed disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6c945]"
                     >
