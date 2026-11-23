@@ -168,7 +168,7 @@ function Home() {
                   Encuentra tu colección
                 </h2>
               </div>
-              <div className="flex items-end justify-between gap-4 sm:justify-end">
+              <div className="flex items-end justify-between gap-4 sm:justify-end [@media(orientation:portrait)_and_(min-width:600px)]:hidden">
                 <p className="max-w-md text-sm leading-7 text-white/50 sm:text-right">
                   Un catálogo pensado para descubrir nuevas piezas y encontrar
                   esos personajes que siempre has querido tener.
@@ -221,14 +221,14 @@ function Home() {
                 ref={categoriesTrackRef}
                 onScroll={updateCategoriesControls}
                 aria-label="Categorías disponibles"
-                className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [@media(orientation:portrait)_and_(min-width:600px)]:overflow-hidden [@media(orientation:portrait)_and_(min-width:600px)]:snap-none"
               >
                 {categories.map((category) => (
                   <Link
                     key={category.name}
                     data-category-card
                     to={`/tienda?categoria=${encodeURIComponent(category.name)}`}
-                    className="group w-[calc((100%-2rem)/3)] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 bg-[#171222] transition-all duration-300 hover:-translate-y-1 hover:border-[#a78bfa]/45 hover:bg-[#1d172b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6c945] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100d18] lg:w-[calc((100%-3rem)/4)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)]"
+                    className="group w-[calc((100%-2rem)/3)] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 bg-[#171222] transition-all duration-300 hover:-translate-y-1 hover:border-[#a78bfa]/45 hover:bg-[#1d172b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6c945] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100d18] lg:w-[calc((100%-3rem)/4)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)] [@media(orientation:portrait)_and_(min-width:600px)]:w-[calc((100%-2rem)/3)]"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-[#211a30]">
                       {category.imageUrl ? (
@@ -289,7 +289,7 @@ function Home() {
               <MobileProductCarousel
                 products={newestProducts}
                 label="Novedades"
-                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4"
+                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4 [@media(orientation:portrait)_and_(min-width:600px)]:!grid-cols-3"
               />
             )}
           </div>
