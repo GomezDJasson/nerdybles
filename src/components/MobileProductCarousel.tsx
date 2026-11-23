@@ -63,7 +63,7 @@ function MobileProductCarousel({
         onScroll={updateControls}
         role="region"
         aria-label={label}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth sm:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {products.map((product) => (
           <div
@@ -71,13 +71,13 @@ function MobileProductCarousel({
             data-product-card
             className="w-[calc((100%-1rem)/2)] shrink-0 snap-start"
           >
-            <ProductCard product={product} />
+            <ProductCard product={product} variant="compact" />
           </div>
         ))}
       </div>
 
       {hasOverflow && (
-        <div className="mt-5 flex justify-center gap-3 sm:hidden">
+        <div className="mt-5 flex justify-center gap-3 md:hidden">
           <button
             type="button"
             onClick={() => scroll(-1)}
@@ -99,9 +99,9 @@ function MobileProductCarousel({
         </div>
       )}
 
-      <div className={`hidden ${gridClassName} sm:grid`}>
+      <div className={`hidden ${gridClassName} md:grid`}>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} variant="compact" />
         ))}
       </div>
     </>
