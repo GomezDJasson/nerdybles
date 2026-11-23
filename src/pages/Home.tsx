@@ -70,20 +70,22 @@ function Home() {
 
   return (
     <main>
-
         <section
           id="inicio"
           className="relative isolate scroll-mt-20"
         >
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_75%_40%,rgba(111,58,190,0.28),transparent_42%),radial-gradient(ellipse_at_10%_90%,rgba(246,201,69,0.08),transparent_35%)]" />
-          <div className="mx-auto grid min-h-[650px] max-w-7xl items-center gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+
+          <div className="mx-auto grid min-h-[430px] max-w-7xl grid-cols-[1.1fr_0.9fr] items-center gap-x-2 gap-y-1 px-4 py-10 sm:min-h-[650px] sm:grid-cols-1 sm:gap-8 sm:px-8 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+
+            {/* CONTENIDO DE TEXTO */}
             <div className="max-w-2xl">
-              <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#a78bfa]/25 bg-[#7c3aed]/10 px-4 py-2 text-xs font-semibold tracking-wide text-[#c4b5fd]">
+              <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#a78bfa]/25 bg-[#7c3aed]/10 px-2 py-1 text-[9px] font-semibold tracking-wide text-[#c4b5fd] sm:mb-7 sm:gap-2 sm:px-4 sm:py-2 sm:text-xs">
                 <Sparkles size={14} />
                 UN UNIVERSO PARA COLECCIONISTAS
               </div>
 
-              <h1 className="text-5xl font-black leading-[1.06] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              <h1 className="text-xl font-black leading-[1.08] tracking-[-0.045em] min-[380px]:text-2xl sm:text-6xl lg:text-7xl">
                 Tu próximo
                 <br />
                 favorito está
@@ -93,43 +95,23 @@ function Home() {
                 </span>
               </h1>
 
-              <p className="mt-7 max-w-lg text-base leading-8 text-white/60 sm:text-lg">
+              <p className="mt-2 max-w-lg text-[11px] leading-4 text-white/60 min-[380px]:text-xs sm:mt-7 sm:text-lg sm:leading-8">
                 Figuras, personajes y objetos que conectan con eso que tanto te gusta.
                 Descubre un espacio hecho para quienes disfrutan coleccionar.
               </p>
-
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="#colecciones"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#f6c945] px-7 py-4 text-sm font-extrabold text-[#211807] shadow-[0_10px_35px_rgba(246,201,69,0.16)] transition-all hover:-translate-y-1 hover:bg-[#ffda68]"
-                >
-                  Descubrir colecciones
-                  <ArrowRight size={18} />
-                </a>
-                <a
-                  href="#nosotros"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 px-7 py-4 text-sm font-semibold text-white/80 transition-colors hover:border-white/35 hover:bg-white/5 hover:text-white"
-                >
-                  Conoce Nerdybles
-                </a>
-              </div>
-
-              <div className="mt-12 flex items-center gap-4 border-t border-white/10 pt-6">
-                <span className="h-1 w-10 rounded-full bg-[#a78bfa]" />
-                <p className="text-xs font-medium tracking-wide text-white/40">
-                  COLECCIONA LO QUE TE HACE ÚNICO
-                </p>
-              </div>
             </div>
 
-            <div className="relative mx-auto flex w-full max-w-[540px] items-center justify-center">
+            {/* IMAGEN DE NERDBOT */}
+            <div className="relative mx-auto -mt-3 flex w-full min-w-0 max-w-[540px] items-center justify-center self-start sm:mt-0 sm:self-center lg:col-start-2 lg:row-span-2">
               <div className="absolute h-[75%] w-[75%] rounded-full bg-[#6d28d9]/25 blur-[90px]" />
               <div className="absolute bottom-[8%] h-8 w-[62%] rounded-[50%] bg-black/50 blur-2xl" />
+
               <img
                 src={nerdBot}
                 alt="Mascota de Nerdybles junto a una figura coleccionable"
-                className="relative z-10 w-full max-w-[510px] drop-shadow-[0_25px_55px_rgba(91,33,182,0.3)]"
+                className="relative z-10 w-full max-w-[510px] object-contain drop-shadow-[0_25px_55px_rgba(91,33,182,0.3)]"
               />
+
               <div className="absolute right-1 top-[16%] hidden rounded-2xl border border-white/10 bg-[#211a30]/90 px-4 py-3 shadow-xl backdrop-blur sm:block">
                 <p className="text-[10px] font-bold tracking-[0.18em] text-[#f6c945]">
                   HELLO, GEEK!
@@ -137,6 +119,32 @@ function Home() {
                 <p className="mt-1 text-xs text-white/65">Tu espacio coleccionista</p>
               </div>
             </div>
+
+            {/* BOTONES: TERCER ELEMENTO DEL GRID */}
+            <div className="col-span-2 mt-3 flex flex-row justify-center gap-2 sm:col-span-1 sm:mt-9 sm:justify-start sm:gap-3">
+              <a
+                href="#colecciones"
+                className="inline-flex items-center justify-center gap-1 rounded-full bg-[#f6c945] px-3 py-2 text-[10px] font-extrabold text-[#211807] shadow-[0_10px_35px_rgba(246,201,69,0.16)] transition-all hover:-translate-y-1 hover:bg-[#ffda68] sm:gap-3 sm:px-7 sm:py-4 sm:text-sm"
+              >
+                Descubrir colecciones
+                <ArrowRight size={14} />
+              </a>
+
+              <a
+                href="#nosotros"
+                className="inline-flex items-center justify-center rounded-full border border-white/15 px-3 py-2 text-[10px] font-semibold text-white/80 transition-colors hover:border-white/35 hover:bg-white/5 hover:text-white sm:px-7 sm:py-4 sm:text-sm"
+              >
+                Conoce Nerdybles
+              </a>
+            </div>
+
+            <div className="mt-6 flex items-center gap-2 border-t border-white/10 pt-3 sm:mt-12 sm:gap-4 sm:pt-6">
+                <span className="h-1 w-10 rounded-full bg-[#a78bfa]" />
+                <p className="text-[9px] font-medium tracking-wide text-white/40 sm:text-xs">
+                  COLECCIONA LO QUE TE HACE ÚNICO
+                </p>
+              </div>
+
           </div>
         </section>
 

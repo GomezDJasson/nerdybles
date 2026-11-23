@@ -21,6 +21,13 @@ function Shop() {
     count: PAGE_SIZE,
   });
 
+  const resetPagination = () => {
+    setPagination({
+      filterKey: "",
+      count: PAGE_SIZE,
+    });
+  };
+
   const products = catalog?.products ?? EMPTY_PRODUCTS;
 
   const categories = catalog?.categories ?? [];
@@ -30,6 +37,7 @@ function Shop() {
   const category = categoryNames.includes(requestedCategory) ? requestedCategory : "Todas";
 
   const updateCategory = (value: string) => {
+    resetPagination();
     const nextParams = new URLSearchParams(searchParams);
     if (value === "Todas") {
       nextParams.delete("categoria");
@@ -75,6 +83,7 @@ function Shop() {
     setSearchParams({});
     setBrand("Todas");
     setAvailability("Todos");
+    resetPagination();
   };
 
   return (
@@ -125,7 +134,10 @@ function Shop() {
               <input
                 type="search"
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
+                onChange={(event) => {
+                  setSearch(event.target.value);
+                  resetPagination();
+                }}
                 placeholder="Buscar por nombre, colección o SKU..."
                 className="w-full rounded-xl border border-white/10 bg-[#100d18] py-3 pl-11 pr-4 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-[#a78bfa]"
               />
@@ -147,7 +159,10 @@ function Shop() {
               <span className="mb-1.5 block text-xs font-semibold text-white/45">Marca</span>
               <select
                 value={brand}
-                onChange={(event) => setBrand(event.target.value)}
+                onChange={(event) => {
+                  setBrand(event.target.value);
+                  resetPagination();
+                }}
                 className="w-full rounded-xl border border-white/10 bg-[#100d18] px-3 py-3 text-sm text-white outline-none focus:border-[#a78bfa]"
               >
                 <option value="Todas">Todas las marcas</option>
@@ -159,7 +174,10 @@ function Shop() {
               <span className="mb-1.5 block text-xs font-semibold text-white/45">Disponibilidad</span>
               <select
                 value={availability}
-                onChange={(event) => setAvailability(event.target.value as AvailabilityFilter)}
+                onChange={(event) => {
+                  setAvailability(event.target.value as AvailabilityFilter);
+                  resetPagination();
+                }}
                 className="w-full rounded-xl border border-white/10 bg-[#100d18] px-3 py-3 text-sm text-white outline-none focus:border-[#a78bfa]"
               >
                 <option value="Todos">Cualquier estado</option>
