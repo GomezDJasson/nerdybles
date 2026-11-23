@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Product } from "../types/product";
 
@@ -88,75 +88,57 @@ function HeroProductImage({ products, loading }: HeroProductImageProps) {
     readStoredSelection
   );
 
-  useEffect(() => {
-    if (loading) return;
-
-    const savedProduct = isFreshSelection(selection)
-      ? products.find((product) => product.id === selection.productId)
-      : undefined;
-
-    if (savedProduct) {
-      if (
-        selection.productName !== savedProduct.name ||
-        selection.imageUrl !== savedProduct.images.main
-      ) {
-        setSelection({
-          ...selection,
-          productName: savedProduct.name,
-          imageUrl: savedProduct.images.main,
-        });
-      }
-      return;
-    }
-
-    setSelection((current) =>
-      getRandomSelection(products, current?.productId)
-    );
-  }, [loading, products, selection]);
-
-  const selectedProduct =
+  const savedProduct =
     !loading && isFreshSelection(selection)
       ? products.find((product) => product.id === selection.productId)
       : undefined;
 
-  useEffect(() => {
-    if (!selectedProduct || !selection) return;
+  const fallbackSelection = useMemo(() => {
+    if (loading || savedProduct) return null;
+    return getRandomSelection(products, selection?.productId);
+  }, [loading, products, savedProduct, selection?.productId]);
 
-    const currentSelection: ProductSelection = {
-      productId: selectedProduct.id,
-      productName: selectedProduct.name,
-      imageUrl: selectedProduct.images.main,
-      selectedAt: selection.selectedAt,
-    };
+  const effectiveSelection = loading
+    ? isFreshSelection(selection)
+      ? selection
+      : null
+    : savedProduct && isFreshSelection(selection)
+      ? {
+          productId: savedProduct.id,
+          productName: savedProduct.name,
+          imageUrl: savedProduct.images.main,
+          selectedAt: selection.selectedAt,
+        }
+      : fallbackSelection;
+
+  const selectedProduct = effectiveSelection
+    ? products.find((product) => product.id === effectiveSelection.productId)
+    : undefined;
+
+  useEffect(() => {
+    if (loading || !effectiveSelection || !selectedProduct) return;
 
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentSelection));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(effectiveSelection));
     } catch {
       // La imagen sigue funcionando aunque el navegador no permita guardar datos.
     }
 
     const remainingTime = Math.max(
       0,
-      currentSelection.selectedAt + ROTATION_INTERVAL - Date.now()
+      effectiveSelection.selectedAt + ROTATION_INTERVAL - Date.now()
     );
 
     const timeoutId = window.setTimeout(() => {
-      setSelection(getRandomSelection(products, selectedProduct.id));
+      setSelection(getRandomSelection(products, effectiveSelection.productId));
     }, remainingTime);
 
     return () => window.clearTimeout(timeoutId);
-  }, [products, selectedProduct, selection]);
+  }, [loading, products, effectiveSelection, selectedProduct]);
 
-  const cachedImage = loading && isFreshSelection(selection);
-  const productName = cachedImage
-    ? selection.productName
-    : selectedProduct?.name;
-  const imageUrl = cachedImage
-    ? selection.imageUrl
-    : selectedProduct?.images.main;
-  const productId = cachedImage
-    ? selection.productId
-    : selectedProduct?.id;
+  const productName = effectiveSelection?.productName;
+  const imageUrl = effectiveSelection?.imageUrl;
+  const productId = effectiveSelection?.productId;
 
   if (!productId || !productName || !imageUrl) {
     return (
