@@ -224,7 +224,7 @@ function Shop() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 xl:gap-5">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4">
               {visibleProducts.map((product) => (
                 <ProductCard key={product.id} product={product} variant="compact" />
               ))}
