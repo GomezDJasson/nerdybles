@@ -107,7 +107,7 @@ function Home() {
                 </span>
               </h1>
 
-              <p className="mt-2 max-w-lg text-[11px] leading-4 text-white/60 min-[380px]:text-xs sm:mt-7 sm:text-lg sm:leading-8 min-[900px]:text-base lg:text-lg">
+              <p className="mt-2 max-w-lg text-[11px] leading-4 text-white/60 min-[380px]:text-xs sm:mt-7 lg:text-lg sm:leading-8 min-[900px]:text-base lg:text-lg">
                 Figuras, personajes y objetos que conectan con eso que tanto te gusta.
                 Descubre un espacio hecho para quienes disfrutan coleccionar.
               </p>
@@ -228,7 +228,7 @@ function Home() {
                     key={category.name}
                     data-category-card
                     to={`/tienda?categoria=${encodeURIComponent(category.name)}`}
-                    className="group w-[calc((100%-2rem)/3)] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 bg-[#171222] transition-all duration-300 hover:-translate-y-1 hover:border-[#a78bfa]/45 hover:bg-[#1d172b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6c945] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100d18] lg:w-[calc((100%-3rem)/4)]"
+                    className="group w-[calc((100%-2rem)/3)] shrink-0 snap-start overflow-hidden rounded-2xl border border-white/10 bg-[#171222] transition-all duration-300 hover:-translate-y-1 hover:border-[#a78bfa]/45 hover:bg-[#1d172b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f6c945] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100d18] lg:w-[calc((100%-3rem)/4)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)]"
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-[#211a30]">
                       {category.imageUrl ? (
@@ -244,7 +244,7 @@ function Home() {
                         </div>
                       )}
                     </div>
-                    <h3 className="px-3 py-4 text-center text-base font-bold text-white transition-colors group-hover:text-[#c4b5fd] sm:text-lg">
+                    <h3 className="px-3 py-4 text-center text-base font-bold text-white transition-colors group-hover:text-[#c4b5fd] lg:text-lg">
                       {category.name}
                     </h3>
                   </Link>
@@ -289,7 +289,7 @@ function Home() {
               <MobileProductCarousel
                 products={newestProducts}
                 label="Novedades"
-                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5"
+                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4"
               />
             )}
           </div>
@@ -343,7 +343,7 @@ function Home() {
               <MobileProductCarousel
                 products={catalog?.featured ?? []}
                 label="Productos destacados"
-                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5"
+                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4"
               />
             )}
           </div>
