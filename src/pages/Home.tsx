@@ -88,7 +88,7 @@ function Home() {
         >
           <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_75%_40%,rgba(111,58,190,0.28),transparent_42%),radial-gradient(ellipse_at_10%_90%,rgba(246,201,69,0.08),transparent_35%)]" />
 
-          <div className="mx-auto grid min-h-[430px] max-w-7xl grid-cols-[1.1fr_0.9fr] items-center gap-x-2 gap-y-1 px-4 py-10 sm:min-h-[650px] sm:grid-cols-1 sm:gap-8 sm:px-8 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+          <div className="mx-auto grid min-h-[430px] max-w-7xl grid-cols-[1.1fr_0.9fr] items-center gap-x-2 gap-y-1 px-4 py-10 sm:min-h-[650px] sm:grid-cols-1 sm:gap-8 sm:px-8 sm:py-16 min-[900px]:grid-cols-[1.05fr_0.95fr] lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
 
             {/* CONTENIDO DE TEXTO */}
             <div className="max-w-2xl">
@@ -97,7 +97,7 @@ function Home() {
                 UN UNIVERSO PARA COLECCIONISTAS
               </div>
 
-              <h1 className="text-xl font-black leading-[1.08] tracking-[-0.045em] min-[380px]:text-2xl sm:text-6xl lg:text-7xl">
+              <h1 className="text-xl font-black leading-[1.08] tracking-[-0.045em] min-[380px]:text-2xl sm:text-6xl min-[900px]:text-5xl lg:text-7xl">
                 Tu próximo
                 <br />
                 favorito está
@@ -107,14 +107,14 @@ function Home() {
                 </span>
               </h1>
 
-              <p className="mt-2 max-w-lg text-[11px] leading-4 text-white/60 min-[380px]:text-xs sm:mt-7 sm:text-lg sm:leading-8">
+              <p className="mt-2 max-w-lg text-[11px] leading-4 text-white/60 min-[380px]:text-xs sm:mt-7 sm:text-lg sm:leading-8 min-[900px]:text-base lg:text-lg">
                 Figuras, personajes y objetos que conectan con eso que tanto te gusta.
                 Descubre un espacio hecho para quienes disfrutan coleccionar.
               </p>
             </div>
 
             {/* IMAGEN ALEATORIA DE PRODUCTO */}
-            <div className="relative mx-auto -mt-3 flex w-full min-w-0 max-w-[540px] items-center justify-center self-start sm:mt-0 sm:self-center lg:col-start-2 lg:row-span-2">
+            <div className="relative mx-auto -mt-3 flex w-full min-w-0 max-w-[540px] items-center justify-center self-start sm:mt-0 sm:self-center min-[900px]:col-start-2 min-[900px]:row-span-2">
               <div className="absolute h-[75%] w-[75%] rounded-full bg-[#6d28d9]/25 blur-[90px]" />
               <div className="absolute bottom-[8%] h-8 w-[62%] rounded-[50%] bg-black/50 blur-2xl" />
 
@@ -130,7 +130,7 @@ function Home() {
             </div>
 
             {/* BOTONES: TERCER ELEMENTO DEL GRID */}
-            <div className="col-span-2 mt-3 flex flex-row justify-center gap-2 sm:col-span-1 sm:mt-9 sm:justify-start sm:gap-3">
+            <div className="col-span-2 mt-3 flex flex-row justify-center gap-2 sm:col-span-1 sm:mt-9 sm:justify-start sm:gap-3 min-[900px]:col-start-1 min-[900px]:row-start-2">
               <a
                 href="#colecciones"
                 className="inline-flex items-center justify-center gap-1 rounded-full bg-[#f6c945] px-3 py-2 text-[10px] font-extrabold text-[#211807] shadow-[0_10px_35px_rgba(246,201,69,0.16)] transition-all hover:-translate-y-1 hover:bg-[#ffda68] sm:gap-3 sm:px-7 sm:py-4 sm:text-sm"
@@ -147,7 +147,7 @@ function Home() {
               </a>
             </div>
 
-            <div className="mt-6 flex items-center gap-2 border-t border-white/10 pt-3 sm:mt-12 sm:gap-4 sm:pt-6">
+            <div className="mt-6 flex items-center gap-2 border-t border-white/10 pt-3 sm:mt-12 sm:gap-4 sm:pt-6 min-[900px]:col-start-1 min-[900px]:row-start-3">
                 <span className="h-1 w-10 rounded-full bg-[#a78bfa]" />
                 <p className="text-[9px] font-medium tracking-wide text-white/40 sm:text-xs">
                   COLECCIONA LO QUE TE HACE ÚNICO
