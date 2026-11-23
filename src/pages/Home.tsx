@@ -22,7 +22,7 @@ function Home() {
           (a, b) =>
             Date.parse(b.dateAdded) - Date.parse(a.dateAdded)
         )
-        .slice(0, 4),
+        .slice(0, 10),
     [catalog?.products]
   );
 
@@ -337,7 +337,6 @@ function Home() {
               <MobileProductCarousel
                 products={newestProducts}
                 label="Novedades"
-                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4 [@media(orientation:portrait)_and_(min-width:600px)]:!grid-cols-3"
               />
             )}
           </div>
@@ -391,7 +390,6 @@ function Home() {
               <MobileProductCarousel
                 products={catalog?.featured ?? []}
                 label="Productos destacados"
-                gridClassName="gap-3 md:grid-cols-4 md:gap-4 xl:gap-5 [@media(orientation:landscape)_and_(min-width:600px)]:grid-cols-4"
               />
             )}
           </div>
