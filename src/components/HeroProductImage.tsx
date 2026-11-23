@@ -98,18 +98,22 @@ function HeroProductImage({ products, loading }: HeroProductImageProps) {
     return getRandomSelection(products, selection?.productId);
   }, [loading, products, savedProduct, selection?.productId]);
 
-  const effectiveSelection = loading
-    ? isFreshSelection(selection)
-      ? selection
-      : null
-    : savedProduct && isFreshSelection(selection)
-      ? {
-          productId: savedProduct.id,
-          productName: savedProduct.name,
-          imageUrl: savedProduct.images.main,
-          selectedAt: selection.selectedAt,
-        }
-      : fallbackSelection;
+  const effectiveSelection = useMemo(() => {
+    if (loading) {
+      return isFreshSelection(selection) ? selection : null;
+    }
+
+    if (savedProduct && isFreshSelection(selection)) {
+      return {
+        productId: savedProduct.id,
+        productName: savedProduct.name,
+        imageUrl: savedProduct.images.main,
+        selectedAt: selection.selectedAt,
+      };
+    }
+
+    return fallbackSelection;
+  }, [loading, selection, savedProduct, fallbackSelection]);
 
   const selectedProduct = effectiveSelection
     ? products.find((product) => product.id === effectiveSelection.productId)
