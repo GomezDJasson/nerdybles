@@ -41,7 +41,7 @@ function ProductCard({ product, variant = "default" }: ProductCardProps) {
         className="block focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#f6c945]"
         aria-label={`Ver detalles de ${product.name}`}
       >
-        <div className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.2),rgba(23,18,34,0.15)_65%)] ${compact ? "p-2.5 sm:p-3" : "p-5"}`}>
+        <div className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,rgba(167,139,250,0.2),rgba(23,18,34,0.15)_65%)] ${compact ? "p-2.5 lg:p-3" : "p-5"}`}>
           {hasImage ? (
             <img
               src={product.images.main}
@@ -60,9 +60,9 @@ function ProductCard({ product, variant = "default" }: ProductCardProps) {
           )}
         </div>
 
-        <div className={compact ? "px-3 pb-2 pt-3 sm:px-3.5" : "px-5 pb-2 pt-5"}>
+        <div className={compact ? "px-3 pb-2 pt-3 lg:px-3.5" : "px-5 pb-2 pt-5"}>
           <div className="flex min-w-0 items-center justify-between gap-1.5">
-            <span className={`min-w-0 truncate font-semibold uppercase tracking-wider text-[#a78bfa] ${compact ? "text-[9px] sm:text-[10px]" : "text-xs"}`}>
+            <span className={`min-w-0 truncate font-semibold uppercase tracking-wider text-[#a78bfa] ${compact ? "text-[9px] lg:text-[10px]" : "text-xs"}`}>
               {product.brand || product.category}
             </span>
             <span className={`shrink-0 text-white/35 ${compact ? "text-[9px]" : "text-xs"}`}>{product.sku}</span>
@@ -79,12 +79,12 @@ function ProductCard({ product, variant = "default" }: ProductCardProps) {
           )}
 
           <div className={`flex min-w-0 items-center justify-between gap-1 border-t border-white/10 ${compact ? "mt-3 pt-3" : "mt-5 gap-3 pt-4"}`}>
-            <span className={`min-w-0 truncate font-extrabold text-[#f6c945] ${compact ? "text-sm sm:text-base" : "text-lg"}`}>
+            <span className={`min-w-0 truncate font-extrabold text-[#f6c945] ${compact ? "text-sm lg:text-base" : "text-lg"}`}>
               {currencyFormatter.format(product.price)}
             </span>
 
             {isAvailable && (
-              <span className={`shrink-0 font-medium text-emerald-400 ${compact ? "text-[9px] sm:text-[10px]" : "text-xs"}`}>
+              <span className={`shrink-0 font-medium text-emerald-400 ${compact ? "text-[9px] lg:text-[10px]" : "text-xs"}`}>
                 Disponible
               </span>
             )}
