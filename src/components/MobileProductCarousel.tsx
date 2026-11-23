@@ -117,7 +117,7 @@ function MobileProductCarousel({
           <div
             key={product.id}
             data-product-card
-            className="w-[calc((100%-1rem)/2)] shrink-0 snap-start [@media(orientation:portrait)_and_(min-width:600px)]:w-[calc((100%-2rem)/3)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)] md:w-[calc((100%-3rem)/4)]"
+            className="w-[calc((100%-1rem)/2)] shrink-0 snap-start [@media(orientation:portrait)_and_(min-width:600px)]:!w-[calc((100%-2rem)/3)] [@media(orientation:landscape)_and_(min-width:600px)]:w-[calc((100%-3rem)/4)] md:w-[calc((100%-3rem)/4)]"
           >
             <ProductCard product={product} variant="compact" />
           </div>
