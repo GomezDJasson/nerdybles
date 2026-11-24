@@ -129,9 +129,9 @@ function ProductDetail() {
           Volver a la tienda
         </Link>
 
-        <div className="grid gap-9 lg:grid-cols-2 lg:gap-14">
+        <div className="grid gap-9 md:grid-cols-2 md:items-start md:gap-8 lg:gap-14">
           <section aria-label="Fotografías del producto" className="min-w-0">
-            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(ellipse_at_center,rgba(111,58,190,0.24),rgba(23,18,34,0.7)_70%)] p-6 sm:p-10">
+            <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(ellipse_at_center,rgba(111,58,190,0.24),rgba(23,18,34,0.7)_70%)] p-6 sm:p-10 md:p-6 lg:p-10">
               {activeImage ? (
                 <img
                   src={activeImage}
@@ -197,7 +197,7 @@ function ProductDetail() {
               <span className="text-xs text-white/35">{product.sku}</span>
             </div>
 
-            <h1 className="mt-3 text-3xl font-black leading-tight tracking-tight sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black leading-tight tracking-tight sm:text-4xl md:text-3xl lg:text-4xl">
               {product.name}
             </h1>
 
@@ -205,7 +205,7 @@ function ProductDetail() {
               <p className="mt-2 text-base text-white/45">{product.collection}</p>
             )}
 
-            <p className="mt-6 text-3xl font-extrabold text-[#f6c945]">
+            <p className="mt-6 text-3xl font-extrabold text-[#f6c945] md:text-2xl lg:text-3xl">
               {currencyFormatter.format(product.price)}
             </p>
 
