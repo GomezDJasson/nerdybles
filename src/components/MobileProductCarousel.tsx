@@ -40,8 +40,6 @@ function MobileProductCarousel({
 
   const handleTrackScroll = () => {
     updateControls();
-
-
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
