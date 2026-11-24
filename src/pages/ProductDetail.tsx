@@ -129,7 +129,7 @@ function ProductDetail() {
           Volver a la tienda
         </Link>
 
-        <div className="grid gap-9 md:grid-cols-2 md:items-start md:gap-8 lg:gap-14">
+        <div className="grid gap-9 min-[600px]:grid-cols-[0.9fr_1.1fr] min-[600px]:items-start min-[600px]:gap-6 md:grid-cols-2 md:gap-8 lg:gap-14">
           <section aria-label="Fotografías del producto" className="min-w-0">
             <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(ellipse_at_center,rgba(111,58,190,0.24),rgba(23,18,34,0.7)_70%)] p-6 sm:p-10 md:p-6 lg:p-10">
               {activeImage ? (
