@@ -14,7 +14,7 @@ function MobileProductCarousel({
 }: MobileProductCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
-  const touchDirectionRef = useRef<-1 | 1 | null>(null);
+  const touchStartScrollLeftRef = useRef<number | null>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
 
   const updateControls = useCallback(() => {
@@ -41,39 +41,36 @@ function MobileProductCarousel({
   const handleTrackScroll = () => {
     updateControls();
 
-    const track = trackRef.current;
-    const direction = touchDirectionRef.current;
-    if (!track || !direction) return;
 
-    const maxScrollLeft = track.scrollWidth - track.clientWidth;
-    const isAtStart = track.scrollLeft <= 1;
-    const isAtEnd = track.scrollLeft >= maxScrollLeft - 1;
-
-    if (direction === 1 && isAtEnd) {
-      touchDirectionRef.current = null;
-      track.scrollTo({ left: 0, behavior: "smooth" });
-    } else if (direction === -1 && isAtStart) {
-      touchDirectionRef.current = null;
-      track.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
-    }
   };
 
   const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
     touchStartXRef.current = event.touches[0]?.clientX ?? null;
+    touchStartScrollLeftRef.current = trackRef.current?.scrollLeft ?? null;
   };
 
   const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
     const startX = touchStartXRef.current;
+    const startScrollLeft = touchStartScrollLeftRef.current;
     const endX = event.changedTouches[0]?.clientX;
     touchStartXRef.current = null;
+    touchStartScrollLeftRef.current = null;
 
-    if (startX === null || endX === undefined) return;
+    const track = trackRef.current;
+    if (!track || startX === null || startScrollLeft === null || endX === undefined) return;
 
     const deltaX = startX - endX;
     if (Math.abs(deltaX) < 30) return;
 
-    touchDirectionRef.current = deltaX > 0 ? 1 : -1;
-    handleTrackScroll();
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const startedAtStart = startScrollLeft <= 1;
+    const startedAtEnd = startScrollLeft >= maxScrollLeft - 1;
+
+    if (deltaX > 0 && startedAtEnd) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else if (deltaX < 0 && startedAtStart) {
+      track.scrollTo({ left: maxScrollLeft, behavior: "smooth" });
+    }
   };
 
   const scroll = (direction: -1 | 1) => {
