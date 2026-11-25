@@ -260,13 +260,6 @@ function ProductDetail() {
               Confirma disponibilidad y detalles de entrega directamente con Nerdybles.
             </p>
 
-            <div className="mt-8 border-t border-white/10 pt-7">
-              <h2 className="text-lg font-bold">Descripción</h2>
-              <p className="mt-3 whitespace-pre-line text-sm leading-7 text-white/60">
-                {product.commercialDescription || product.technicalDescription || "Pronto agregaremos más información sobre este producto."}
-              </p>
-            </div>
-
             {specifications.length > 0 && (
               <div className="mt-8 border-t border-white/10 pt-7">
                 <h2 className="text-lg font-bold">Detalles del producto</h2>
@@ -282,6 +275,13 @@ function ProductDetail() {
             )}
           </section>
         </div>
+
+        <section aria-labelledby="product-description" className="mt-10 border-t border-white/10 pt-8">
+          <h2 id="product-description" className="text-xl font-bold">Descripción</h2>
+          <p className="mt-4 max-w-none whitespace-pre-line text-sm leading-7 text-white/60">
+            {product.commercialDescription || product.technicalDescription || "Pronto agregaremos más información sobre este producto."}
+          </p>
+        </section>
       </div>
     </main>
   );
